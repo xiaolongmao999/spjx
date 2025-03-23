@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./style.css">
+    <title>视频解析</title>
+</head>
+
+<body>
+
+    <body>
+        <div id="video-container">
+            <iframe id="video-player" allowfullscreen></iframe>
+        </div>
+
+        <div class="control-group">
+            <select id="parser-select">
+                <option value="爱豆" data-url="https://jx.xymp4.cc//?url=">爱豆</option>
+                <option value="playerjy/B站" data-url="https://jx.playerjy.com/?url=">playerjy/B站</option>
+                <option value="冰豆" data-url="https://bd.jx.cn/?url=">冰豆1</option>
+                <option value="M3U8" data-url="https://jx.m3u8.tv/jiexi/?url=">M3U8</option>
+                <option value="虾米" data-url="https://jx.xmflv.com/?url=">虾米</option>
+                <option value="冰豆" data-url="https://api.qianqi.net/vip/?url=">冰豆2</option>
+            </select>
+        </div>
+
+        <!-- 修改输入框结构 -->
+        <div class="control-group">
+            <div class="input-container">
+                <input type="text" id="video-url" placeholder="请输入视频链接">
+                <span class="clear-button" id="clearBtn">×</span>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <button onclick="playVideo()">立即解析播放</button>
+        </div>
+
+        <script>
+            // 获取DOM元素
+            const videoUrlInput = document.getElementById('video-url');
+            const clearBtn = document.getElementById('clearBtn');
+
+            // 清空按钮点击事件
+            clearBtn.addEventListener('click', function () {
+                videoUrlInput.value = '';
+                clearBtn.style.display = 'none';
+                videoUrlInput.focus(); // 保持焦点在输入框
+            });
+
+            // 输入框输入事件
+            videoUrlInput.addEventListener('input', function () {
+                clearBtn.style.display = this.value ? 'block' : 'none';
+            });
+
+            // 原有播放函数保持不变
+            function playVideo() {
+                const select = document.getElementById('parser-select');
+                const videoUrl = videoUrlInput.value;
+
+                const selectedOption = select.options[select.selectedIndex];
+                const baseUrl = selectedOption.getAttribute('data-url');
+
+                const encodedUrl = encodeURIComponent(videoUrl);
+                const finalUrl = baseUrl + encodedUrl;
+
+                const player = document.getElementById('video-player');
+                player.src = finalUrl;
+            }
+
+            // 回车键触发播放
+            videoUrlInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    playVideo();
+                }
+            });
+            // 防止移动端输入框缩放
+            document.addEventListener('DOMContentLoaded', function () {
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+                    const viewport = document.querySelector('meta[name="viewport"]');
+                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
+                }
+            });
+
+            // 增加点击区域优化
+            document.querySelectorAll('button, select').forEach(element => {
+                element.style.minHeight = '44px'; /* Apple推荐的最小触控尺寸 */
+            });
+            
+        </script>
+    </body>
+</body>
+
+</html>
