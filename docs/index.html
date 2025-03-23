@@ -37,7 +37,25 @@
         <div class="control-group">
             <button onclick="playVideo()">立即解析播放</button>
         </div>
-
+        <div class="control-group platforms">
+            <div class="platform-buttons">
+                <a href="https://www.youku.com" target="_blank" class="platform-btn" title="优酷">
+                    <img src="./images/youku.png" alt="优酷">
+                </a>
+                <a href="https://v.qq.com" target="_blank" class="platform-btn" title="腾讯视频">
+                    <img src="./images/tengxun.png" alt="腾讯">
+                </a>
+                <a href="https://www.iqiyi.com" target="_blank" class="platform-btn" title="爱奇艺">
+                    <img src="./images/aiqiyi.png" alt="爱奇艺">
+                </a>
+                <a href="https://www.mgtv.com" target="_blank" class="platform-btn" title="芒果TV">
+                    <img src="./images/mangguo.png" alt="芒果">
+                </a>
+                <a href="https://www.bilibili.com" target="_blank" class="platform-btn" title="哔哩哔哩">
+                    <img src="./images/bilibili.png" alt="B站">
+                </a>
+            </div>
+        </div>
         <script>
             // 获取DOM元素
             const videoUrlInput = document.getElementById('video-url');
@@ -88,7 +106,7 @@
             document.querySelectorAll('button, select').forEach(element => {
                 element.style.minHeight = '44px'; /* Apple推荐的最小触控尺寸 */
             });
-            
+
         </script>
     </body>
 </body>
